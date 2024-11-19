@@ -41,7 +41,7 @@ const movieCallback = async (callbackQuery, bot) => {
             reply_markup: updatedKeyboard  // Inline tugmalarni yangilash
         });
     } else {
-        bot.sendMessage(callbackQuery.message.chat.id, "Nimadur xato !");
+        bot.sendMessage(callbackQuery.message.chat.id, "callback query uchun kino topilmadi !");
     }
 }
 
