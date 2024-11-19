@@ -21,6 +21,4 @@ async function getUrls(pageUrl) {
     }
 }
 
-getUrls("http://asilmedia.org/15829-bayram-ixtirochisi-uzbek-tilida-2017-ozbekcha-tarjima-kino-hd.html")
-
 module.exports = getUrls;
