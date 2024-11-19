@@ -27,9 +27,8 @@ module.exports = (bot) => {
             } catch (error) {
                 console.log(error)
             }
-
         }
-        if (message.text !== "/start" && message.text !== "/help" && message.text !== "/new") {
+        if (message.text !== "/start" && message.text !== "/help") {
             if (message?.entities && message.entities[0]?.type === "url") {
                 try {
                     const findMovie = await Movie.findOne({ instagramUrl: message.text });
