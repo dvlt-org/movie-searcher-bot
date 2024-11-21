@@ -14,6 +14,7 @@ function isAdmin(userId) {
 const adminUploadMovie = async (message, bot) => {
     if (message.text.includes("/admin") && isAdmin(message.chat.id)) {
         const messages = message.text.split("*");
+        console.log(messages)
 
         // Tekshiruv: messages[2] mavjudligini tekshirish
         if (messages.length < 3) {
@@ -24,6 +25,7 @@ const adminUploadMovie = async (message, bot) => {
         try {
             bot.sendMessage(message.chat.id, "🔄 kut!")
             const response = await getUrls(messages[2]);
+            console.log(response)
 
             // getUrlsdan javobni tekshirish
             if (!response || response.length < 4) {
