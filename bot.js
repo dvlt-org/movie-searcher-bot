@@ -10,7 +10,9 @@ dotenv.config()
 
 // connect to db and running bot
 connectToDb()
-const bot = new Telegram(process.env.TOKEN, { polling: false, webHook: "https://movie-searcher-bot.onrender.com" });
+const bot = new Telegram(process.env.TOKEN, { polling: false, });
+
+bot.setWebHook('https://movie-searcher-bot.onrender.com/webhook');
 
 // commands section
 commands(bot)
