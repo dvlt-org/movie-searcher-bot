@@ -21,7 +21,6 @@ const adminUploadMovie = async (message, bot) => {
             bot.sendMessage(message.chat.id, "Iltimos, barcha ma'lumotlarni to'g'ri yuboring!");
             return;
         }
-
         try {
             bot.sendMessage(message.chat.id, "🔄 kut!")
             const response = await getUrls(messages[2]);
@@ -39,6 +38,7 @@ const adminUploadMovie = async (message, bot) => {
                         coverImgUrl: response[3],
                         movieName: response[4]
                     });
+                    console.log(newMovie)
 
                     console.log(newMovie)
 
