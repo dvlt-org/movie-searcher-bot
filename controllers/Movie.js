@@ -24,6 +24,7 @@ const adminUploadMovie = async (message, bot) => {
         try {
             bot.sendMessage(message.chat.id, "🔄 kut!")
             const response = await getUrls(messages[2]);
+            console.log(response)
 
             // getUrlsdan javobni tekshirish
             if (!response || response.length < 4) {
@@ -37,6 +38,7 @@ const adminUploadMovie = async (message, bot) => {
                         coverImgUrl: response[3],
                         movieName: response[4]
                     });
+                    console.log(newMovie)
 
                     if (newMovie) {
                         bot.sendMessage(message.chat.id, "Qabul qildim !");
