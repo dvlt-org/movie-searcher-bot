@@ -41,5 +41,5 @@ const findMovieFromDb = async (message, bot) => {
 }
 
 module.exports = {
-    upload: adminUploadMovie,
+    find: findMovieFromDb
 }
