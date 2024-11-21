@@ -1,24 +1,47 @@
-const puppeteer = require("puppeteer")
+const adminUploadMovie = async (message, bot) => {
+    if (message.text.includes("/admin") && isAdmin(message.chat.id)) {
+        const messages = message.text.split("*");
+        console.log(messages)
 
-async function getUrls(pageUrl) {
-    try {
-        const browser = await puppeteer.launch()
-        const page = await browser.newPage()
-        await page.goto(pageUrl)
+        // Tekshiruv: messages[2] mavjudligini tekshirish
+        if (messages.length < 3) {
+            bot.sendMessage(message.chat.id, "Iltimos, barcha ma'lumotlarni to'g'ri yuboring!");
+            return;
+        }
+        try {
+            bot.sendMessage(message.chat.id, "🔄 kut!")
+            const response = await getUrls(messages[2]);
+            console.log(response)
 
-        const urls = await page.evaluate(() => {
-            const elements = document.querySelectorAll(".downlist-inner a")
-            const coverImage = document.querySelector(".img-fit")
-            const movieName = document.querySelector("header .title").textContent
-            return [...Array.from(elements).map((item, index) => index === 0 ? null : item.href).filter(Boolean), coverImage.src, movieName]
-        })
-        console.log(urls)
-        await browser.close()
-        return urls
-    } catch (error) {
-        console.log("Kechirasiz malumotni o'qib bo'lmadi")
-        return "There's wrong !"
+            // getUrlsdan javobni tekshirish
+            if (!response || !response[2]) {
+                bot.sendMessage(message.chat.id, "Response kelmayapti")
+            } else {
+                try {
+                    // Movie modeliga ma'lumot kiritish
+                    const newMovie = await Movie.create({
+                        instagramUrl: messages[1],
+                        movieUrl: response.slice(0, 3),
+                        coverImgUrl: response[3],
+                        movieName: response[4]
+                    });
+                    console.log(newMovie)
+
+                    console.log(newMovie)
+
+                    if (newMovie) {
+                        bot.sendMessage(message.chat.id, "Qabul qildim !");
+                    } else {
+                        bot.sendMessage(message.chat.id, "Bu kino yuklanmadi !");
+                    }
+                } catch (error) {
+                    console.log("Movie.create xatosi: ", error); // Xatoni loglash
+                    bot.sendMessage(message.chat.id, "Bu raqam ishlatilingan bo'lishi mumkin yoki no'to'g'ri yuborilgan !");
+                }
+            }
+        } catch (error) {
+            console.log("getUrls xatosi: ", error); // Xatoni loglash
+            bot.sendMessage(message.chat.id, "Malumot olishda xatolik yuz berdi!");
+        }
     }
 }
-
-module.exports = getUrls;
