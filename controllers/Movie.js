@@ -40,6 +40,8 @@ const adminUploadMovie = async (message, bot) => {
                         movieName: response[4]
                     });
 
+                    console.log(newMovie)
+
                     if (newMovie) {
                         bot.sendMessage(message.chat.id, "Qabul qildim !");
                     } else {
