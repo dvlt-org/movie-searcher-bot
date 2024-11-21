@@ -24,7 +24,7 @@ const adminUploadMovie = async (message, bot) => {
                 });
                 if (newMovie) bot.sendMessage(message.chat.id, "Qabul qildim !")
                 else {
-                    bot.sendMessage(message.chat.id, "Xato bor !")
+                    bot.sendMessage(message.chat.id, "Bu kino yuklanmadi !")
                 }
             }
         } catch (error) {
@@ -34,8 +34,8 @@ const adminUploadMovie = async (message, bot) => {
 }
 
 const findMovieFromDb = async (message, bot) => {
-    if (message.text !== "/start" && message.text !== "/help") {
-        if (message?.entities && message.entities[0]?.type === "url") {
+    if (message.text !== "/start" && message.text !== "/help" && !message.text.includes("/admin*")) {
+        if (message.text) {
             try {
                 const findMovie = await Movie.findOne({ instagramUrl: message.text.trim() });
                 console.log(message.text.trim())

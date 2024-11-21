@@ -7,7 +7,7 @@ module.exports = (bot) => {
             const findUser = await User.findOne({ telegramId: chatId });
             console.log(findUser);
             if (findUser) {
-                bot.sendMessage(chatId, `Yana ko'rganimdan xursanman @${findUser.username}`);
+                bot.sendMessage(chatId, `📩Ko'rmoqchi bo'lgan kinoniyingizni instagram urlini yuboring !\n👉Agar qanday qilib url olishni bilmasangiz /help`);
             } else {
                 console.log("ishlamoqda");
                 await User.create({
@@ -16,7 +16,7 @@ module.exports = (bot) => {
                     lastName: message.chat.last_name,
                     telegramId: message.chat.id
                 });
-                bot.sendMessage(chatId, "Salom men sizni eslab qoldim !");
+                bot.sendMessage(chatId, `📩Ko'rmoqchi bo'lgan kinoniyingizni raqamini yuboring !\n👉Agar qanday qilib url olishni bilmasangiz /help`);
             }
         } catch (error) {
             console.error(error);
@@ -29,7 +29,7 @@ module.exports = (bot) => {
             const findUser = await User.findOne({ telegramId: chatId }); // username o'rniga telegramId ishlatilsin
             console.log(findUser);
             bot.sendMessage(chatId,
-                `Botni ishlatish ketma ketligi:\n1-Instagramdagi biror bir kinoning silkasini oling!\n2-Uni botga yuboring !\nShunday qilib bot sizga siz qidirayotgan kinoni tashlaydi !`);
+                `👤 Botni ishlatish qoidalari\n🔗 Instagramdan kanaldan kino *raqamini* oling !\n✅ Va bot sizga kinoni tashlaydi\n👨‍💻 Agar shunda ham muammo bo'lsa admin bialn bo'g'laning @L_O_R_D_o8`, { parse_mode: 'Markdown' });
         } catch (error) {
             console.error(error);
         }
