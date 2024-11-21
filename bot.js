@@ -12,6 +12,7 @@ dotenv.config()
 connectToDb()
 const bot = new Telegram(process.env.TOKEN, { polling: true, });
 
+bot.deleteWebHook();
 // commands section
 commands(bot)
 
