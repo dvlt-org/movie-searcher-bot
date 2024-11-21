@@ -1,8 +1,12 @@
 const Movie = require("../model/Movies")
 const getUrls = require("../config/getUrls")
+const dotenv = require("dotenv")
+dotenv.config()
 
 
-const admins = [6168952166, 6313919188, 7074563147];
+const new_admins = process.env.ADMINS
+const admins = new_admins.split(",").map(Number)
+
 function isAdmin(userId) {
     return admins.includes(userId)
 }
@@ -14,17 +18,21 @@ const adminUploadMovie = async (message, bot) => {
             bot.sendMessage(message.chat.id, "🔄 kut!")
             const response = await getUrls(messages[2])
             if (!response || response.length < 4) {
-                bot.sendMessage(message.chat.id, "Axmoq no'to'gri yubording !");
+                bot.sendMessage(message.chat.id, "Malumot notog'ri yuborilgan !");
             } else {
-                const newMovie = await Movie.create({
-                    instagramUrl: messages[1],
-                    movieUrl: response.slice(0, 3),
-                    coverImgUrl: response[3],
-                    movieName: response[4]
-                });
-                if (newMovie) bot.sendMessage(message.chat.id, "Qabul qildim !")
-                else {
-                    bot.sendMessage(message.chat.id, "Bu kino yuklanmadi !")
+                try {
+                    const newMovie = await Movie.create({
+                        instagramUrl: messages[1],
+                        movieUrl: response.slice(0, 3),
+                        coverImgUrl: response[3],
+                        movieName: response[4]
+                    });
+                    if (newMovie) bot.sendMessage(message.chat.id, "Qabul qildim !")
+                    else {
+                        bot.sendMessage(message.chat.id, "Bu kino yuklanmadi !")
+                    }
+                } catch (error) {
+                    bot.sendMessage(message.chat.id, "Bu raqam ishlatilingan bo'lishi mumkin yoki no'to'g'ri yuborilgan !");
                 }
             }
         } catch (error) {

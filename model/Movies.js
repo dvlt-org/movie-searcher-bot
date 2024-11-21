@@ -4,6 +4,7 @@ const movieSchema = new Schema({
     instagramUrl: {
         type: String,
         required: true,
+        unique: true,
     },
     movieUrl: {
         type: [String],
