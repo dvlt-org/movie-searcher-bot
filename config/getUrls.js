@@ -24,8 +24,7 @@ async function getUrls(pageUrl) {
         await browser.close();
         return urls;
     } catch (error) {
-        console.log("Kechirasiz, malumotni o'qib bo'lmadi:", error.message);  // Xatolik haqida aniqroq ma'lumot
-        return "There's something wrong!";
+        return "Malumotni olib bo'lmadi"
     }
 }
 

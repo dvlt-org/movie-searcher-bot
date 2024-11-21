@@ -27,8 +27,8 @@ const adminUploadMovie = async (message, bot) => {
             console.log(response)
 
             // getUrlsdan javobni tekshirish
-            if (!response || response.length < 4) {
-                bot.sendMessage(message.chat.id, "Malumot notog'ri yuborilgan !");
+            if (!response || !response[2]) {
+                bot.sendMessage(message.chat.id, "Response kelmayapti")
             } else {
                 try {
                     // Movie modeliga ma'lumot kiritish
