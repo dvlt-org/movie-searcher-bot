@@ -1,5 +1,4 @@
 const Movie = require("../model/Movies")
-const getUrls = require("../config/getUrls")
 const dotenv = require("dotenv")
 dotenv.config()
 
@@ -43,5 +42,4 @@ const findMovieFromDb = async (message, bot) => {
 
 module.exports = {
     upload: adminUploadMovie,
-    find: findMovieFromDb,
 }
