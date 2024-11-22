@@ -1,6 +1,4 @@
 const Movie = require("../model/Movies")
-const dotenv = require("dotenv")
-dotenv.config()
 
 const findMovieFromDb = async (message, bot) => {
     if (message.text !== "/start" && message.text !== "/help" && !message.text.includes("/admin*")) {
