@@ -20,7 +20,6 @@ async function getUrls(pageUrl) {
             return [...Array.from(elements).map((item, index) => index === 0 ? null : item.href).filter(Boolean), coverImage.src, movieName];
         });
 
-        console.log(urls);
         await browser.close();
         return urls;
     } catch (error) {

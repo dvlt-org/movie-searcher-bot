@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const movieSchema = new Schema({
-    instagramUrl: {
+    movieId: {
         type: String,
         required: true,
         unique: true,
