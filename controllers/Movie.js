@@ -41,13 +41,17 @@ const uploadMovie = async (message, bot) => {
     try {
         if (message.text.includes("/admin")) {
             const splitText = message.text.split("*")
-            if (splitText.length >= 2) {
-                const urls = await getUrls(splitText[2])
+            if (splitText.length >= 1) {
+                console.log(splitText[1])
+                const urls = await getUrls(splitText[1])
                 console.log("urls ", urls)
                 if (urls.length > 3) {
                     try {
+                        const fullMovies = (await Movie.find()).length
+                        const countMoives = fullMovies + 1;
+
                         const newMovie = await Movie.create({
-                            movieId: splitText[1],
+                            movieId: countMoives + 1,
                             movieUrl: urls.slice(0, 3),
                             coverImgUrl: urls[3],
                             movieName: urls[4],
